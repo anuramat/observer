@@ -10,7 +10,11 @@
           "type": "string"
         },
         "project_type": {
-          "type": "string"
+          "enum": [
+            "system_configuration",
+            "entertainment_and_procrastination",
+            "machine_learning_research"
+          ]
         },
         "details": {
           "type": "string"
