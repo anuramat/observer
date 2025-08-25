@@ -1,0 +1,27 @@
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "user_activity",
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "project_name": {
+          "type": "string"
+        },
+        "project_type": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "details",
+        "project_name",
+        "project_type"
+      ],
+      "title": "TopLevel"
+    }
+  }
+}
