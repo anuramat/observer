@@ -1,0 +1,26 @@
+[project]
+name = "observer"
+version = "0.1.0"
+description = "AI-powered activity monitoring tool"
+dependencies = [
+    "pydantic>=2.0",
+    "sqlalchemy>=2.0",
+    "pillow>=10.0",
+    "python-i3ipc>=2.2",
+    "rich>=13.0",
+    "typer>=0.9",
+]
+
+[project.scripts]
+observer = "observer.main:app"
+
+[tool.uv]
+dev-dependencies = [
+    "ruff",
+    "mypy",
+    "pytest",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
