@@ -14,7 +14,7 @@ from .database import Database
 from .models import ActivityRecord, ContextWindow
 
 console = Console()
-app = typer.Typer()
+app = typer.Typer(no_args_is_help=True)
 
 
 class Observer:
