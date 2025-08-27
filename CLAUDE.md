@@ -74,7 +74,7 @@ The project uses a modular Python architecture with persistent storage and conte
 
 1. **Capture**: Screenshot focused window and extract window metadata
 2. **Context**: Retrieve recent activities from database for AI context
-3. **Analyze**: Send screenshot + context to AI model with Pydantic schema
+3. **Analyze**: Send screenshot + context to AI model with Pydantic schema. The prompt explicitly lists allowed `project_type` enum values to ensure valid outputs.
 4. **Store**: Save structured output and screenshot to SQLite database
 5. **Display**: Show activity summary in terminal
 
@@ -89,7 +89,6 @@ The project uses a modular Python architecture with persistent storage and conte
 The AI model receives a JSON schema generated from Pydantic models (`ActivityOutput`) ensuring structured, type-safe responses with fields:
 - `project_name` - Current project identifier
 - `project_type` - Category enum
-- `details` - Activity description  
-- `confidence` - Analysis confidence score
+- `details` - Activity description
 
 Context awareness provides recent activity history to the AI model for better continuity and project tracking.
