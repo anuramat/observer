@@ -2,7 +2,6 @@
 
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import list
 
 from sqlalchemy import Column, DateTime, Float, Integer, String, Text, create_engine
 from sqlalchemy.ext.declarative import declarative_base
