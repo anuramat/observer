@@ -14,7 +14,14 @@ from .database import Database
 from .models import ActivityRecord, ContextWindow
 
 console = Console()
-app = typer.Typer(no_args_is_help=True)
+app = typer.Typer()
+
+
+@app.callback(invoke_without_command=True)
+def _root(ctx: typer.Context):
+    if not ctx.invoked_subcommand:
+        typer.echo(ctx.get_help())
+        raise typer.Exit(0)
 
 
 class Observer:
