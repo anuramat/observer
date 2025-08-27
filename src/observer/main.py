@@ -55,7 +55,6 @@ class Observer:
             project_name=output.project_name,
             project_type=output.project_type,
             details=output.details,
-            confidence=output.confidence,
             screenshot_path=str(screenshot_path),
             context_summary=self._summarize_context(recent),
         )
@@ -94,7 +93,6 @@ class Observer:
         table.add_row("Project", record.project_name)
         table.add_row("Type", record.project_type.value.replace("_", " "))
         table.add_row("Details", record.details)
-        table.add_row("Confidence", f"{record.confidence:.1%}")
 
         console.print(table)
         console.print()
@@ -134,14 +132,12 @@ def history(
     table.add_column("Time", style="cyan")
     table.add_column("Project", style="green")
     table.add_column("Details", style="white")
-    table.add_column("Confidence", style="yellow")
 
     for act in reversed(activities):
         table.add_row(
             act.timestamp.strftime("%H:%M:%S"),
             act.project_name,
             act.details[:60] + "..." if len(act.details) > 60 else act.details,
-            f"{act.confidence:.1%}",
         )
 
     console.print(table)

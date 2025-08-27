@@ -48,7 +48,7 @@ class Database:
                 project_name=record.project_name,
                 project_type=record.project_type.value,
                 details=record.details,
-                confidence=record.confidence,
+                confidence=None,
                 screenshot_path=str(screenshot_path),
                 context_summary=record.context_summary,
             )
@@ -80,7 +80,6 @@ class Database:
                     project_name=a.project_name,
                     project_type=ProjectType(a.project_type),
                     details=a.details,
-                    confidence=a.confidence,
                     screenshot_path=a.screenshot_path,
                     context_summary=a.context_summary,
                 )

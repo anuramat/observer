@@ -44,12 +44,15 @@ class AIAnalyzer:
                 project_name="unknown",
                 project_type=ProjectType.ENTERTAINMENT,
                 details=f"Analysis failed: {str(e)}",
-                confidence=0.0,
             )
 
     def _build_prompt(self, context: ContextWindow) -> str:
         """Build context-aware prompt."""
-        prompt = "Analyze the screenshot and describe what the user is doing.\n"
+        allowed = ", ".join([t.value for t in ProjectType])
+        prompt = (
+            "Analyze the screenshot and describe what the user is doing.\n"
+            f"Allowed project_type values: [{allowed}]. Use exactly one of these.\n"
+        )
 
         if context.recent_activities:
             recent = context.recent_activities[:5]

@@ -20,7 +20,6 @@ class ActivityOutput(BaseModel):
     project_name: str = Field(description="Name of the current project")
     project_type: ProjectType
     details: str = Field(description="What the user is doing")
-    confidence: float = Field(0.0, ge=0.0, le=1.0, description="Confidence score")
 
 
 class ActivityRecord(BaseModel):
@@ -33,7 +32,6 @@ class ActivityRecord(BaseModel):
     project_name: str
     project_type: ProjectType
     details: str
-    confidence: float
     screenshot_path: Optional[str] = None
     context_summary: Optional[str] = None
 
