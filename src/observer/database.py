@@ -14,8 +14,9 @@ Base = declarative_base()
 
 class Activity(Base):
     """SQLAlchemy model for activities."""
-    __tablename__ = 'activities'
-    
+
+    __tablename__ = "activities"
+
     id = Column(Integer, primary_key=True)
     timestamp = Column(DateTime, default=datetime.now)
     window_title = Column(String(255))
@@ -30,12 +31,12 @@ class Activity(Base):
 
 class Database:
     """Database interface for Observer."""
-    
+
     def __init__(self, db_path: Path):
-        self.engine = create_engine(f'sqlite:///{db_path}')
+        self.engine = create_engine(f"sqlite:///{db_path}")
         Base.metadata.create_all(self.engine)
         self.Session = sessionmaker(bind=self.engine)
-    
+
     def save_activity(self, record: ActivityRecord, screenshot_path: Path) -> int:
         """Save activity record to database."""
         session = self.Session()
@@ -49,25 +50,27 @@ class Database:
                 details=record.details,
                 confidence=record.confidence,
                 screenshot_path=str(screenshot_path),
-                context_summary=record.context_summary
+                context_summary=record.context_summary,
             )
             session.add(activity)
             session.commit()
             return activity.id
         finally:
             session.close()
-    
+
     def get_recent_activities(self, minutes: int = 10) -> list[ActivityRecord]:
         """Get recent activities from database."""
         session = self.Session()
         try:
             cutoff = datetime.now() - timedelta(minutes=minutes)
-            activities = (session.query(Activity)
-                         .filter(Activity.timestamp > cutoff)
-                         .order_by(Activity.timestamp.desc())
-                         .limit(20)
-                         .all())
-            
+            activities = (
+                session.query(Activity)
+                .filter(Activity.timestamp > cutoff)
+                .order_by(Activity.timestamp.desc())
+                .limit(20)
+                .all()
+            )
+
             return [
                 ActivityRecord(
                     id=a.id,
@@ -79,8 +82,9 @@ class Database:
                     details=a.details,
                     confidence=a.confidence,
                     screenshot_path=a.screenshot_path,
-                    context_summary=a.context_summary
-                ) for a in activities
+                    context_summary=a.context_summary,
+                )
+                for a in activities
             ]
         finally:
             session.close()
