@@ -3,7 +3,6 @@
 import subprocess
 from datetime import datetime
 from pathlib import Path
-from typing import tuple
 
 import i3ipc
 from PIL import Image
